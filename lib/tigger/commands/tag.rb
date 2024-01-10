@@ -1,3 +1,4 @@
+require 'open-uri'
 require_relative './base'
 
 module Tigger
@@ -17,6 +18,18 @@ module Tigger
             tag.artist = global[:artist] || item[:artist]
             tag.album = global[:album] || item[:album]
 
+            cover_url = global[:cover_url] || item[:cover_url]
+            if cover_url
+              cover = {
+                :id          => :APIC,
+                :mimetype    => 'image/jpeg',
+                :picturetype => 3,
+                :textenc     => 0,
+                :data        => URI.open(cover_url).read
+              }
+              tag << cover
+            end
+
             tag.update!
 
             dest = [
@@ -24,8 +37,8 @@ module Tigger
               [
                 tag.track ? tag.track.to_s.rjust(2, "0") : nil,
                 tag.title,
-            ].compact.join(' '),
-            ].join(' - ') + '.mp3'
+              ].compact.join(' '),
+            ].join(' - ').gsub('/', ' ')+ '.mp3'
 
             if item[:source] != dest
               FileUtils.mv item[:source], dest
