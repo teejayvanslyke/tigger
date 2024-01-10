@@ -1,8 +1,8 @@
 # Tigger
 
-TODO: Delete this and the text below, and describe your gem
+_The wonderful thing about Tiggers is that I'm the only one!_
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tigger`. To experiment with that code, run `bin/console` for an interactive prompt.
+Batch ID3 tag your music files from the command line.
 
 ## Installation
 
